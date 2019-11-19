@@ -80,7 +80,7 @@
                     </div> <!-- end front panel -->
                     <div class="back">
                         <div class="header">
-                            <h5 class="motto" id="top_head"><span class="tcn" id="cname"></span>									
+                            <h5 class="motto tcn" id="top_head"><span id="cname"></span>									
 							</h5>
                         </div>
                         <div class="content">
@@ -91,7 +91,7 @@
                                 <div class="stats-container">
                                     <div class="stats">
                                         <h4 id="temp"></h4>
-                                        <span class="shead">
+                                        <span class="shead"><i class="fa fa-checked"></i>
                                             Temp
                                         </span>
                                     </div>
@@ -159,11 +159,16 @@
 			
 			$.get(url, function(data, status){
 				resp = JSON.parse(data);
-				description= resp.weather[0].description;
-				//alert(description);
 				if(resp.cod != 200){
 					$("#visibility").text(resp.message);
+					$("#cname").text(resp.message);
+					$("#temp").text("0");
+					$("#humidity").text("0";
+					return;
 				}
+				description= resp.weather[0].description;
+				//alert(description);
+
 				$("#description").text(description);
 				$("#cname").text(resp.name);
 				var pres = resp.main.pressure
