@@ -63,7 +63,7 @@
                         <div class="content">
                             <div class="main">
                                 <h3 class="name">Weather App!</h3>
-                                <p class="profession">Any City</p>
+                                <p class="profession">Get Current Weather for any City</p>
 								<div class="floating-label">      
 										<input class="floating-input istyle" name="city" id="city" type="text" placeholder=" ">
 										<span class="highlight"></span>
@@ -80,7 +80,8 @@
                     </div> <!-- end front panel -->
                     <div class="back">
                         <div class="header">
-                            <h5 class="motto" id="top_head"></h5>
+                            <h5 class="motto" id="top_head"><span class="tcn" id="cname"></span>									
+							</h5>
                         </div>
                         <div class="content">
                             <div class="main">
@@ -90,21 +91,21 @@
                                 <div class="stats-container">
                                     <div class="stats">
                                         <h4 id="temp"></h4>
-                                        <span >
+                                        <span class="shead">
                                             Temp
-                                        </p>
+                                        </span>
                                     </div>
                                     <div class="stats">
                                         <h4 id="pressure"></h4>
-                                        <p>
-                                            Pressue
-                                        </p>
+                                        <span class="shead">
+                                            Pressure
+                                        </span>
                                     </div>
                                     <div class="stats">
                                         <h4 id="humidity"></h4>
-                                        <p>
+                                        <span class="shead">
                                             Humidity
-                                        </p>
+                                        </span>
                                     </div>
                                 </div>
 
@@ -153,18 +154,23 @@
             $card.removeClass('hover');
         } else {
 			var city = $('#city').val();
-			var url = 'https://deft-effect-259505.appspot.com/city/' + city;
+			//var url = 'https://deft-effect-259505.appspot.com/city/' + city;
+			var url = 'http://127.0.0.1:5000/city/' + city;
+			
 			$.get(url, function(data, status){
 				resp = JSON.parse(data);
 				description= resp.weather[0].description;
 				//alert(description);
+				if(resp.cod != 200){
+					$("#visibility").text(resp.message);
+				}
 				$("#description").text(description);
-				$("#top_head").text(city + " Current Weather");
+				$("#cname").text(resp.name);
 				var pres = resp.main.pressure
 				$("#pressure").text(pres);
 				var temp = resp.main.temp
 				$("#temp").text(temp);
-				$("#visibility").text(resp.visibility);
+				$("#visibility").text(" Visibility: " + resp.visibility);
 				$("#humidity").text(resp.main.humidity);
 			});
 			

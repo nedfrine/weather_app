@@ -325,7 +325,20 @@ body {
     margin-top: 20%;
 
 }
+.shead{
+	color: green;
+	
+}
 
+
+
+.tcn{
+	color: #00ffd0;
+    background: linear-gradient(45deg, #23242670, #1e2f41bf);
+    border-radius: 20px;
+    border: 2px solid #fffffff5;
+    padding: 2%;
+}
 
 
 
